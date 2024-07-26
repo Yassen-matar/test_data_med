@@ -26,7 +26,7 @@ class _SignUpState extends State<SignUp> {
   void dispose() {
     widget.userName.dispose();
     widget.number.dispose();
-    globals.email.dispose();
+   /*  globals.email.dispose(); */
     widget.password.dispose();
     widget.confirmPassword.dispose();
     widget.focusNodeUsername.dispose();
