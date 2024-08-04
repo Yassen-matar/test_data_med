@@ -14,28 +14,8 @@ import '../../../../error/presentation/view/error.dart';
 import '../../../../widget/custom_button_auth.dart';
 import '../../../verification_code/presentation/view/verification_code.dart';
 
-class SignUp extends StatefulWidget with VariableSignUp {
+class SignUp extends StatelessWidget with VariableSignUp {
   SignUp({super.key});
-
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> {
-  @override
-  void dispose() {
-    widget.userName.dispose();
-    widget.number.dispose();
-   /*  globals.email.dispose(); */
-    widget.password.dispose();
-    widget.confirmPassword.dispose();
-    widget.focusNodeUsername.dispose();
-    widget.focusNodeNumber.dispose();
-    widget.focusNodeEmail.dispose();
-    widget.focusNodePassword.dispose();
-    widget.focusNodeConfirmPassword.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +60,7 @@ class _SignUpState extends State<SignUp> {
                       height: 20,
                     ),
                     Form(
-                      key: widget.formKeySignUp,
+                      key: formKeySignUp,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -90,8 +70,8 @@ class _SignUpState extends State<SignUp> {
                           ),
                           CustomTextFormField(
                             hintText: "User Name",
-                            focusNode: widget.focusNodeUsername,
-                            mycontroller: widget.userName,
+                            focusNode: focusNodeUsername,
+                            mycontroller: userName,
                             validator: (val) =>
                                 validation(val!, "userName", context),
                           ),
@@ -100,7 +80,7 @@ class _SignUpState extends State<SignUp> {
                             style: CustomThemeData.black18,
                           ),
                           CustomTextFormField(
-                              focusNode: widget.focusNodeNumber,
+                              focusNode: focusNodeNumber,
                               hintText: "Number",
                               iconData: Text(
                                 "09",
@@ -110,13 +90,13 @@ class _SignUpState extends State<SignUp> {
                               validator: (val) =>
                                   validation(val!, "phone", context),
                               obscureText: true,
-                              mycontroller: widget.number),
+                              mycontroller: number),
                           Text(
                             "Email",
                             style: CustomThemeData.black18,
                           ),
                           CustomTextFormField(
-                              focusNode: widget.focusNodeEmail,
+                              focusNode: focusNodeEmail,
                               hintText: "Email",
                               validator: (val) =>
                                   validation(val!, "email", context),
@@ -126,12 +106,12 @@ class _SignUpState extends State<SignUp> {
                             style: CustomThemeData.black18,
                           ),
                           CustomTextFormField(
-                              focusNode: widget.focusNodePassword,
+                              focusNode: focusNodePassword,
                               hintText: "Password",
                               obscureText: true,
                               validator: (val) =>
                                   validation(val!, "password", context),
-                              mycontroller: widget.password),
+                              mycontroller: password),
                           Text(
                             "Confirm Password",
                             style: CustomThemeData.black18,
@@ -142,10 +122,10 @@ class _SignUpState extends State<SignUp> {
                               validator: (val) => validation(
                                   val!,
                                   "confirmPassword",
-                                  password: widget.password.text,
+                                  password: password.text,
                                   context),
-                              focusNode: widget.focusNodeConfirmPassword,
-                              mycontroller: widget.confirmPassword),
+                              focusNode: focusNodeConfirmPassword,
+                              mycontroller: confirmPassword),
                         ],
                       ),
                     ),
@@ -154,15 +134,15 @@ class _SignUpState extends State<SignUp> {
                     ),
                     CustomButtonAuth(
                       onPressed: () async {
-                        if (widget.formKeySignUp.currentState!.validate()) {
+                        if (formKeySignUp.currentState!.validate()) {
                           await BlocProvider.of<SignUpCubit>(context)
-                              .signUp(globals.email.text, widget.password.text);
+                              .signUp(globals.email.text, password.text);
                         }
-                        widget.focusNodeUsername.unfocus();
-                        widget.focusNodeNumber.unfocus();
-                        widget.focusNodeEmail.unfocus();
-                        widget.focusNodePassword.unfocus();
-                        widget.focusNodeConfirmPassword.unfocus();
+                        focusNodeUsername.unfocus();
+                        focusNodeNumber.unfocus();
+                        focusNodeEmail.unfocus();
+                        focusNodePassword.unfocus();
+                        focusNodeConfirmPassword.unfocus();
                       },
                       text: "Sign Up",
                     ),

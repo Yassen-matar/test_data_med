@@ -3,13 +3,15 @@ import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 import 'package:test_data_med/features/auth/sign_up/data/model/sign_up_model.dart';
 import 'package:test_data_med/features/auth/sign_up/domin/use_case/sign_up_use_case.dart';
+import 'package:test_data_med/features/auth/sign_up/presentation/view/variable/variable_sign_up.dart';
+import 'package:test_data_med/global.dart';
 
 import '../../../../../../core/function/check_internet.dart';
 import '../../../../../../core/server/enum.dart';
 
 part 'sign_up_state.dart';
 
-class SignUpCubit extends Cubit<SignUpState> {
+class SignUpCubit extends Cubit<SignUpState> with VariableSignUp {
   SignUpUseCase signUpUseCase;
   SignUpCubit(this.signUpUseCase) : super(SignUpInitial());
   bool isCheckBox = false;
@@ -28,5 +30,21 @@ class SignUpCubit extends Cubit<SignUpState> {
     } else {
       emit(SignUpNoConnection());
     }
+  }
+
+  @override
+  Future<void> close() {
+    print("Close ");
+    userName.dispose();
+    email.dispose();
+    password.dispose();
+    confirmPassword.dispose();
+    number.dispose();
+    focusNodeUsername.dispose();
+    focusNodeConfirmPassword.dispose();
+    focusNodePassword.dispose();
+    focusNodeEmail.dispose();
+    focusNodeNumber.dispose();
+    return super.close();
   }
 }

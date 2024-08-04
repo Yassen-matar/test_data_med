@@ -10,6 +10,7 @@ import '../manager/cubit/splash_cubit.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
